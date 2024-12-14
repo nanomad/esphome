@@ -15,9 +15,9 @@ void WaveShareEPaper1in9I2C::setup() {
   this->reset_pin_->setup();
   this->busy_pin_->setup();
   this->init_screen_();
-  this->write_lut_(LUT_5S);
-  this->wait_for_idle_();
-  this->display();
+  // this->write_lut_(LUT_5S);
+  // this->wait_for_idle_();
+  // this->display();
 }
 
 void WaveShareEPaper1in9I2C::update() {
@@ -145,11 +145,14 @@ void WaveShareEPaper1in9I2C::reset_screen_() {
   ESP_LOGV(TAG, "WaveShareEPaper1in9I2C::reset_screen");
 
   this->send_reset_(true);
-  delay(200);  // NOLINT
+  // delay(200);  // NOLINT
+  this->wait_for_idle_();
   this->send_reset_(false);
-  delay(20);
+  // delay(20);
+  this->wait_for_idle_();
   this->send_reset_(true);
-  delay(200);  // NOLINT
+  // delay(200);  // NOLINT
+  this->wait_for_idle_();
 }
 
 /**
